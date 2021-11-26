@@ -100,7 +100,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
     // 选择头像的数据
     private File mCurrentFile;
     private boolean isSelectAvatar;
-//    private Uri mNewPhotoUri;
+    //    private Uri mNewPhotoUri;
     Photo photo;
 
     public RegisterUserBasicInfoActivity() {
@@ -167,7 +167,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                                     r.mCurrentFile = resource;
                                     r.isSelectAvatar = true;
                                     Glide.with(r).load(resource)
-                                                .dontAnimate().skipMemoryCache(true) // 不使用内存缓存
+                                            .dontAnimate().skipMemoryCache(true) // 不使用内存缓存
                                             .diskCacheStrategy(DiskCacheStrategy.NONE) // 不使用磁盘缓存
                                             .into(r.mAvatarImg);
                                 }
@@ -303,6 +303,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                     if (mCurrentFile != null) {
                         Log.e("TAG_上传头像", "uri=" + mCurrentFile.getPath());
                         AvatarHelper.getInstance().displayUrl(mCurrentFile.getPath(), mAvatarImg);
+                        isSelectHead = true;
 
                     } else {
                         ToastUtil.showToast(this, R.string.c_crop_failed);
@@ -320,6 +321,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                 if (mCurrentFile != null) {
                     Log.e("TAG_上传头像", "uri=" + mCurrentFile.getPath());
                     AvatarHelper.getInstance().displayUrl(mCurrentFile.getPath(), mAvatarImg);
+                    isSelectHead = true;
 
                 } else {
                     ToastUtil.showToast(this, R.string.c_crop_failed);
@@ -343,8 +345,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                     mTempData.setCityId(cityId);
                     mTempData.setAreaId(countyId);
                 }
-            }
-            else if (requestCode == 101) {
+            } else if (requestCode == 101) {
                 //返回对象集合：如果你需要了解图片的宽、高、大小、用户是否选中原图选项等信息，可以用这个
                 ArrayList<Photo> resultPhotos =
                         data.getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
@@ -395,6 +396,8 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
         mTempData.setNickName(mNameEdit.getText().toString().trim());
     }
 
+    private boolean isSelectHead = false;
+
     private void register() {
         if (!MyApplication.getInstance().isNetworkActive()) {
             ToastUtil.showToast(this, R.string.net_exception);
@@ -407,6 +410,12 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
             mNameEdit.setError(StringUtils.editTextHtmlErrorTip(this, R.string.name_empty_error));
             return;
         }
+
+        if (!isSelectHead) {//未选择头像无法注册
+            ToastUtil.showToast(this, R.string.head_empty_error);
+            return;
+        }
+
 
         /*if (!StringUtils.isNickName(mTempData.getNickName())) {
             mNameEdit.requestFocus();

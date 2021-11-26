@@ -341,6 +341,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ`¬!"£$%^*()~=#{}[];':,./?/*-_+&#060;&#062;&#064;&#03
     <string name="sex_man">男</string>
     <string name="sex_woman">女</string>
     <string name="name_empty_error">昵称不能为空</string>
+    <string name="head_empty_error">头像不能为空</string>
 
     <string name="live_address_empty_error">居住地不能为空</string>
     <string name="nick_name_format_error">昵称不合法，只允许中文、英文、字母和下划线，且长度为3至10个字符</string>
