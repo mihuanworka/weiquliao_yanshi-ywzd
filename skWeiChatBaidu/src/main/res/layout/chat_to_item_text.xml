@@ -107,5 +107,16 @@
             tools:visibility="visible" />
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/send_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_tv"
+        android:layout_marginTop="48dp"
+        android:layout_toRightOf="@id/chat_head_iv"
+        android:textSize="@dimen/SmallerTextSize"
+        android:text="2021-9-7"
+        tools:text="2021-9-7"
+        tools:visibility="visible" />
 
 </RelativeLayout>

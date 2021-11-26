@@ -6,15 +6,18 @@ import android.widget.TextView;
 import com.ydd.yanshi.R;
 import com.ydd.yanshi.bean.message.ChatMessage;
 import com.ydd.yanshi.util.Constants;
+import com.ydd.yanshi.util.DateFormatUtil;
 import com.ydd.yanshi.util.HtmlUtils;
 import com.ydd.yanshi.util.PreferenceUtils;
 import com.ydd.yanshi.util.StringUtils;
+import com.ydd.yanshi.util.TimeUtils;
 import com.ydd.yanshi.util.link.HttpTextView;
 
 public class TextViewHolder extends AChatHolderInterface {
 
     public HttpTextView mTvContent;
     public TextView tvFireTime;
+    public TextView tvTime;
 
     @Override
     public int itemLayoutId(boolean isMysend) {
@@ -24,6 +27,7 @@ public class TextViewHolder extends AChatHolderInterface {
     @Override
     public void initView(View view) {
         mTvContent = view.findViewById(R.id.chat_text);
+        tvTime = view.findViewById(R.id.send_time);
         mRootView = view.findViewById(R.id.chat_warp_view);
         if (!isMysend) {
             tvFireTime = view.findViewById(R.id.tv_fire_time);
@@ -36,6 +40,10 @@ public class TextViewHolder extends AChatHolderInterface {
         int size = PreferenceUtils.getInt(mContext, Constants.FONT_SIZE) + 14;
         mTvContent.setTextSize(size);
         mTvContent.setTextColor(mContext.getResources().getColor(R.color.black));
+        String strTime = TimeUtils.sk_time_long_to_chat_time_str(message.getReadTime());
+        String strTime2 = TimeUtils.getTimeMMdd(message.getReadTime());
+        String strTime3 = TimeUtils.long_to_yMdHm_str(message.getReadTime());
+        tvTime.setText(strTime);
 
         String content = StringUtils.replaceSpecialChar(message.getContent());
         CharSequence charSequence = HtmlUtils.transform200SpanString(content, true);

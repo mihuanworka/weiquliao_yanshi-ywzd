@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/chat_item_padding_bottom"
     android:paddingLeft="@dimen/chat_item_padding_left"
+    android:paddingTop="@dimen/chat_item_padding_top"
     android:paddingRight="@dimen/chat_item_padding_right"
-    android:paddingTop="@dimen/chat_item_padding_top">
+    android:paddingBottom="@dimen/chat_item_padding_bottom">
 
     <TextView
         android:id="@+id/time_tv"
@@ -14,23 +14,42 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/tip_drawable"
         android:gravity="center"
-        android:paddingBottom="2dp"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:paddingTop="2dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="2dp"
         android:visibility="gone" />
 
     <com.ydd.yanshi.view.HeadView
         android:id="@+id/chat_head_iv"
         android:layout_width="@dimen/chat_head_size"
         android:layout_height="@dimen/chat_head_size"
-        android:layout_alignParentRight="true"
         android:layout_below="@id/time_tv"
-        android:layout_marginEnd="@dimen/chat_head_right"
+        android:layout_alignParentRight="true"
         android:layout_marginStart="@dimen/chat_head_left"
         android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_marginEnd="@dimen/chat_head_right"
         android:contentDescription="@string/app_name"
         android:src="@drawable/avatar_normal" />
+
+    <CheckBox
+        android:id="@+id/chat_msc"
+        style="@style/CustomCheckBoxTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chat_warp_view"
+        android:clickable="false"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/send_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_toLeftOf="@id/chat_head_iv"
+        android:text="2021-9-7"
+        android:textSize="@dimen/SmallerTextSize"
+        tools:text="2021-9-7" />
 
     <TextView
         android:id="@+id/nick_name"
@@ -71,13 +90,5 @@
 
     <include layout="@layout/view_holder_state_from" />
 
-    <CheckBox
-        android:id="@+id/chat_msc"
-        style="@style/CustomCheckBoxTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/chat_warp_view"
-        android:clickable="false"
-        android:visibility="gone" />
 
 </RelativeLayout>
